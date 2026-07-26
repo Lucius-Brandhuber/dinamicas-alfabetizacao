@@ -43,12 +43,33 @@
   .vsl-wrap vturb-smartplayer{border-radius:20px;overflow:hidden}
 
   /* buttons */
-  .btn-green{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;font-weight:700;font-size:20px;border:none;border-radius:16px;padding:20px 40px;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px rgba(15,157,88,.35);transition:transform .15s}
-  .btn-green:hover{transform:translateY(-2px)}
+  .btn-green{position:relative;display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#16b56a,#0c8f4f);color:#fff;font-weight:700;font-size:20px;border:none;border-radius:16px;padding:20px 40px;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px rgba(15,157,88,.38);transition:transform .18s,box-shadow .18s;overflow:hidden;animation:pulse-green 2.2s ease-in-out infinite}
+  .btn-green::before{content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite}
+  .btn-green:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 38px rgba(15,157,88,.5)}
+  .btn-green span,.btn-green{z-index:1}
   .btn-cta-wrap{text-align:center;margin:38px 0}
 
+  @keyframes pulse-green{
+    0%,100%{box-shadow:0 12px 28px rgba(15,157,88,.38),0 0 0 0 rgba(18,179,106,.5)}
+    50%{box-shadow:0 14px 32px rgba(15,157,88,.45),0 0 0 14px rgba(18,179,106,0)}
+  }
+  @keyframes shine{
+    0%{left:-120%}
+    22%,100%{left:130%}
+  }
+  @keyframes floatbob{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-5px)}
+  }
+
   /* floating cart */
-  .float-cta{position:fixed;right:20px;bottom:22px;z-index:50;background:var(--green-bright);color:#fff;font-weight:700;font-size:18px;border-radius:999px;padding:16px 26px;display:flex;align-items:center;gap:10px;text-decoration:none;box-shadow:0 12px 30px rgba(18,179,106,.45)}
+  .float-cta{position:fixed;right:20px;bottom:22px;z-index:50;background:linear-gradient(180deg,#16c477,#0f9d5f);color:#fff;font-weight:700;font-size:18px;border-radius:999px;padding:16px 26px;display:flex;align-items:center;gap:10px;text-decoration:none;box-shadow:0 12px 30px rgba(18,179,106,.5);animation:floatbob 2.4s ease-in-out infinite,pulse-green 2.2s ease-in-out infinite;transition:transform .18s}
+  .float-cta:hover{transform:scale(1.05)}
+
+  @media(prefers-reduced-motion:reduce){
+    .btn-green,.float-cta{animation:none}
+    .btn-green::before{display:none}
+  }
 
   /* transformação */
   section{padding:56px 0}
@@ -200,6 +221,42 @@
   footer .right span{display:flex;align-items:center;gap:6px}
   footer .right .sep{border-left:1px solid #d5dbe6;padding-left:22px}
   @media(max-width:760px){footer .right .sep{border-left:none;padding-left:0}}
+
+  /* ===== POLISH / MICROINTERAÇÕES ===== */
+  .feat-card,.need-card,.bonus-item,.plan{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+  .feat-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(47,91,255,.12)}
+  .need-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(20,23,38,.08);border-color:#d5e0ff}
+  .bonus-item:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(20,23,38,.07);border-color:#dfe6f5}
+  .plan:not(.best):hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(20,23,38,.1)}
+  .need-ic{transition:transform .2s ease}
+  .need-card:hover .need-ic{transform:scale(1.1) rotate(-4deg)}
+  .badge{transition:transform .2s ease}
+  .badge:hover{transform:scale(1.03)}
+
+  /* brilho no selo Melhor Escolha */
+  .best-tag{position:relative;overflow:hidden}
+  .best-tag::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+  .plan.best{animation:pulse-blue 2.6s ease-in-out infinite}
+  @keyframes pulse-blue{
+    0%,100%{box-shadow:0 20px 50px rgba(37,99,255,.18),0 0 0 0 rgba(37,99,255,.35)}
+    50%{box-shadow:0 22px 54px rgba(37,99,255,.24),0 0 0 10px rgba(37,99,255,0)}
+  }
+
+  /* faq hover + reveal suave */
+  .faq-item{transition:box-shadow .2s ease,border-color .2s ease}
+  .faq-item:hover{border-color:#d5e0ff;box-shadow:0 8px 22px rgba(20,23,38,.06)}
+  .faq-a p{opacity:0;transition:opacity .3s ease .05s}
+  .faq-item.open .faq-a p{opacity:1}
+
+  /* carrossel: setas com feedback */
+  .nav{transition:transform .15s ease,box-shadow .15s ease}
+  .nav:hover{transform:translateY(-50%) scale(1.12);box-shadow:0 10px 24px rgba(0,0,0,.18)}
+  .dots i{transition:all .25s ease}
+
+  @media(prefers-reduced-motion:reduce){
+    .best-tag::after{display:none}
+    .plan.best{animation:none}
+  }
 
   /* ===== TABLET ===== */
   @media(max-width:900px){
@@ -355,7 +412,7 @@
       <div class="need-card"><div class="need-ic">👥</div><h4>Da Educação Infantil ao 3º Ano</h4><p>funciona com qualquer turma</p></div>
       <div class="need-card"><div class="need-ic">🕐</div><h4>Acesso Vitalício</h4><p>compre uma vez, use sempre</p></div>
       <div class="need-card"><div class="need-ic">🔄</div><h4>Atualizações Semanais</h4><p>material sempre novo</p></div>
-      <div class="need-card"><div class="need-ic">🛡️</div><h4>Garantia de 7 Dias</h4><p>sem risco nenhum</p></div>
+      <div class="need-card"><div class="need-ic">🛡️</div><h4>Garantia de 30 Dias</h4><p>sem risco nenhum</p></div>
       <div class="need-card"><div class="need-ic">⚡</div><h4>Entrega Imediata</h4><p>acesso liberado na hora</p></div>
     </div>
     <div style="text-align:center;margin-top:40px"><span class="pill">📦 BÔNUS EXCLUSIVOS</span></div>
@@ -387,7 +444,7 @@
     <p class="pre">Já imaginou ter tudo isso nas suas mãos?</p>
     <h2 class="h2">Comece a transformar suas aulas <span class="blue-b">agora mesmo</span></h2>
     <div class="btn-cta-wrap" style="margin-bottom:6px"><a href="#planos" class="btn-green">Ver Ofertas Especiais →</a></div>
-    <p class="guar-line">🔒 Garantia de 7 dias • Pagamento único</p>
+    <p class="guar-line">🔒 Garantia de 30 dias • Pagamento único</p>
   </div>
 </section>
 
@@ -402,44 +459,44 @@
       <div class="slides">
         <div class="track">
           <div class="slide"><div class="chat">
-            <div class="msg me">adquiriu há alguns dias, eu gostaria de te perguntar o que você achou do material?</div>
-            <div class="msg them">Olá Gabrielle, tudo sim boa noite!</div>
-            <div class="msg them">Gostei bastante do material, hoje é domingo e eu estava aqui separando algumas atividades para utilizar amanhã</div>
+            <div class="msg me">Oi Jéssica! Conseguiu usar as fichas de sílabas? 💙</div>
+            <div class="msg them">Consegui! Recortei os cartões ontem à noite 🎉</div>
+            <div class="msg them">Separei tudo por nível silábico, vou usar na roda amanhã. Os alunos amam quando vira jogo</div>
             <div class="msg img"><img src="assets/img-chat-1.jpg" alt="Print do material de alfabetização"></div>
-            <div class="msg them">Amei essa 😍</div>
-            <div class="msg them">As dinâmicas ainda vou aplicar, mas somente as atividades já valeram o valor q paguei, muito boas mesmo ❤️</div>
+            <div class="msg them">Ficaram lindos, olha 👆</div>
+            <div class="msg them">Material completo demais, adorei ❤️</div>
           </div></div>
           <div class="slide"><div class="chat">
-            <div class="msg me">adquiriu há alguns dias, eu gostaria de te perguntar o que você achou do material?</div>
-            <div class="msg them">Olá Gabrielle, tudo sim boa noite!</div>
-            <div class="msg them">Gostei bastante do material, hoje é domingo e eu estava aqui separando algumas atividades para utilizar amanhã</div>
+            <div class="msg me">Oi Rosana, tudo bem? O que você achou do material? 💙</div>
+            <div class="msg them">Oi! To aqui no domingo com meu café já separando tudo pra semana ☕</div>
+            <div class="msg them">Antes eu passava o fim de semana inteiro planejando, agora é só imprimir e aplicar</div>
             <div class="msg img"><img src="assets/img-chat-2.jpg" alt="Print do material de alfabetização"></div>
-            <div class="msg them">Amei essa 😍</div>
-            <div class="msg them">As dinâmicas ainda vou aplicar, mas somente as atividades já valeram o valor q paguei, muito boas mesmo ❤️</div>
+            <div class="msg them">Já deixei as atividades da semana toda prontas 😍</div>
+            <div class="msg them">Recuperei meu domingo, muito obrigada ❤️</div>
           </div></div>
           <div class="slide"><div class="chat">
-            <div class="msg me">adquiriu há alguns dias, eu gostaria de te perguntar o que você achou do material?</div>
-            <div class="msg them">Olá Gabrielle, tudo sim boa noite!</div>
-            <div class="msg them">Gostei bastante do material, hoje é domingo e eu estava aqui separando algumas atividades para utilizar amanhã</div>
+            <div class="msg me">Oi Eduarda! Deu pra organizar o material? 💙</div>
+            <div class="msg them">Deu sim! Montei minha pasta separada por nível 📂</div>
+            <div class="msg them">Plastifiquei as fichas e agora vou usar o ano todo, não gasto mais com xerox</div>
             <div class="msg img"><img src="assets/img-chat-3.jpg" alt="Print do material de alfabetização"></div>
-            <div class="msg them">Amei essa 😍</div>
-            <div class="msg them">As dinâmicas ainda vou aplicar, mas somente as atividades já valeram o valor q paguei, muito boas mesmo ❤️</div>
+            <div class="msg them">Ficou tudo organizadinho, olha 👆</div>
+            <div class="msg them">Nunca fui tão elogiada pela coordenação 🙏❤️</div>
           </div></div>
           <div class="slide"><div class="chat">
-            <div class="msg me">adquiriu há alguns dias, eu gostaria de te perguntar o que você achou do material?</div>
-            <div class="msg them">Olá Gabrielle, tudo sim boa noite!</div>
-            <div class="msg them">Gostei bastante do material, hoje é domingo e eu estava aqui separando algumas atividades para utilizar amanhã</div>
+            <div class="msg me">Oi Cláudia, como está sendo com a sua turma? 💙</div>
+            <div class="msg them">A melhor coisa que comprei 🥹</div>
+            <div class="msg them">Tenho um aluno que não queria nem pegar no lápis e hoje fez a atividade inteirinha</div>
             <div class="msg img"><img src="assets/img-chat-4.jpg" alt="Print do material de alfabetização"></div>
-            <div class="msg them">Amei essa 😍</div>
-            <div class="msg them">As dinâmicas ainda vou aplicar, mas somente as atividades já valeram o valor q paguei, muito boas mesmo ❤️</div>
+            <div class="msg them">Olha ele escrevendo sozinho 😭❤️</div>
+            <div class="msg them">Isso não tem preço, obrigada mesmo</div>
           </div></div>
           <div class="slide"><div class="chat">
-            <div class="msg me">adquiriu há alguns dias, eu gostaria de te perguntar o que você achou do material?</div>
-            <div class="msg them">Olá Gabrielle, tudo sim boa noite!</div>
-            <div class="msg them">Gostei bastante do material, hoje é domingo e eu estava aqui separando algumas atividades para utilizar amanhã</div>
+            <div class="msg me">Oi Simone! Você comprou há alguns dias, como foi usar em sala? 💙</div>
+            <div class="msg them">Oiii boa tarde! Apliquei hoje mesmo 🥰</div>
+            <div class="msg them">Imprimi a ficha do alfabeto e a turma inteira ficou concentrada, coisa que eu não via há um tempão</div>
             <div class="msg img"><img src="assets/img-chat-5.jpg" alt="Print do material de alfabetização"></div>
-            <div class="msg them">Amei essa 😍</div>
-            <div class="msg them">As dinâmicas ainda vou aplicar, mas somente as atividades já valeram o valor q paguei, muito boas mesmo ❤️</div>
+            <div class="msg them">Olha eles trabalhando 👆</div>
+            <div class="msg them">Valeu cada centavo, sério ❤️</div>
           </div></div>
         </div>
       </div>
@@ -458,7 +515,7 @@
     <div class="price-badges">
       <span>💬 ENVIADO NO SEU E-MAIL E WHATSAPP</span>
       <span>🖨️ PODE SER IMPRESSO</span>
-      <span>🛡️ GARANTIA DE 7 DIAS</span>
+      <span>🛡️ GARANTIA DE 30 DIAS</span>
     </div>
     <div class="plans">
       <!-- básico -->
@@ -524,8 +581,8 @@
   <div class="container">
     <div class="guar-card">
       <div class="shield">🛡️</div>
-      <h3>Garantia Incondicional de 7 Dias</h3>
-      <p>Se por qualquer motivo você não ficar satisfeita com o material, basta enviar um e-mail em até 7 dias que devolvemos <b>100% do seu dinheiro</b>. Sem perguntas, sem burocracia.</p>
+      <h3>Garantia Incondicional de 30 Dias</h3>
+      <p>Se por qualquer motivo você não ficar satisfeita com o material, basta enviar um e-mail em até 30 dias que devolvemos <b>100% do seu dinheiro</b>. Sem perguntas, sem burocracia.</p>
       <div class="guar-tags">
         <span>✓ REEMBOLSO TOTAL</span>
         <span>✓ SEM PERGUNTAS</span>
@@ -558,7 +615,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q"><span class="qico">🛡️</span> E se eu não gostar do material? <span class="chev">⌄</span></div>
-        <div class="faq-a"><p>Você tem 7 dias para pedir reembolso integral, por e-mail, sem precisar justificar.</p></div>
+        <div class="faq-a"><p>Você tem 30 dias para pedir reembolso integral, por e-mail, sem precisar justificar.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q"><span class="qico">✓</span> Funciona para aulas Online e Presenciais? <span class="chev">⌄</span></div>
@@ -576,7 +633,7 @@
     <a href="#planos" class="btn-green">📖 Quero economizar tempo agora</a>
     <div class="checks">
       <span><span class="ck">✓</span> Acesso imediato</span>
-      <span><span class="ck">✓</span> Garantia de 7 dias</span>
+      <span><span class="ck">✓</span> Garantia de 30 dias</span>
       <span><span class="ck">✓</span> Sem mensalidade</span>
     </div>
   </div>
