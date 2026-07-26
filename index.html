@@ -39,6 +39,8 @@
   .video{width:340px;max-width:88%;aspect-ratio:9/16;margin:0 auto;border-radius:26px;background:linear-gradient(160deg,#c9b8e6,#8f7bd0);display:flex;align-items:flex-end;justify-content:center;color:#fff;font-weight:800;font-size:22px;text-align:center;padding:26px;box-shadow:0 20px 50px rgba(0,0,0,.18);position:relative;overflow:hidden}
   .video::after{content:"▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:70px;height:70px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:26px}
   .video span{position:relative;z-index:1;text-shadow:0 2px 6px rgba(0,0,0,.4)}
+  .vsl-wrap{width:400px;max-width:92%;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+  .vsl-wrap vturb-smartplayer{border-radius:20px;overflow:hidden}
 
   /* buttons */
   .btn-green{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;font-weight:700;font-size:20px;border:none;border-radius:16px;padding:20px 40px;cursor:pointer;text-decoration:none;box-shadow:0 12px 28px rgba(15,157,88,.35);transition:transform .15s}
@@ -205,7 +207,9 @@
     <h1>Professora, <span class="blue-b">economize tempo</span> e tenha <span class="blue-b">aulas de alfabetização prontas em minutos</span></h1>
     <p class="sub">Chega de perder horas planejando. +400 dinâmicas e recursos extras prontos pra imprimir e aplicar amanhã mesmo.</p>
     <div class="watch">👇 <span>Assista o vídeo abaixo</span></div>
-    <div class="video"><span>DINÂMICAS DE<br>ALFABETIZAÇÃO</span></div>
+    <div class="vsl-wrap">
+      <vturb-smartplayer id="vid-6a66917476193c4257e0c12e" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+    </div>
     <div class="btn-cta-wrap"><a href="#planos" class="btn-green">Quero Acessar Agora →</a></div>
   </div>
 </section>
@@ -476,6 +480,13 @@
 
 <!-- floating cart -->
 <a href="#planos" class="float-cta">🛒 Garantir Acesso</a>
+
+<!-- vturb mini-VSL player -->
+<script type="text/javascript">
+  var s=document.createElement("script");
+  s.src="https://scripts.converteai.net/0b154649-6c10-4afb-870c-8854223d684c/players/6a66917476193c4257e0c12e/v4/player.js",
+  s.async=!0,document.head.appendChild(s);
+</script>
 
 <script>
   document.querySelectorAll('.faq-q').forEach(function(q){
