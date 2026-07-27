@@ -85,6 +85,8 @@ src="https://www.facebook.com/tr?id=2067763437201886&ev=PageView&noscript=1"
   /* floating cart */
   .float-cta{position:fixed;right:20px;bottom:22px;z-index:50;background:linear-gradient(180deg,#16c477,#0f9d5f);color:#fff;font-weight:700;font-size:18px;border-radius:999px;padding:16px 26px;display:flex;align-items:center;gap:10px;text-decoration:none;box-shadow:0 12px 30px rgba(18,179,106,.5);animation:floatbob 2.4s ease-in-out infinite,pulse-green 2.2s ease-in-out infinite;transition:transform .18s}
   .float-cta:hover{transform:scale(1.05)}
+  .float-cta.hide{opacity:0;pointer-events:none;transform:translateY(24px)}
+  .float-cta{transition:transform .18s,opacity .28s ease}
 
   @media(prefers-reduced-motion:reduce){
     .btn-green,.float-cta{animation:none}
@@ -683,6 +685,17 @@ src="https://www.facebook.com/tr?id=2067763437201886&ev=PageView&noscript=1"
       q.parentElement.classList.toggle('open');
     });
   });
+
+  // esconde o botão flutuante quando os planos estão visíveis (evita cobrir o COMPRAR AGORA)
+  (function(){
+    var floatBtn=document.querySelector('.float-cta');
+    var plans=document.getElementById('planos');
+    if(!floatBtn||!plans||!('IntersectionObserver' in window)) return;
+    var io=new IntersectionObserver(function(entries){
+      floatBtn.classList.toggle('hide', entries[0].isIntersecting);
+    },{threshold:0.05});
+    io.observe(plans);
+  })();
 
   // carrossel de depoimentos
   (function(){
